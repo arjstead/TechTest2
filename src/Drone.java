@@ -5,11 +5,18 @@ public class Drone
 	private String currentCommand;
 	private boolean started;
 	private Coordinate boundary;
-	private Coordinate position;
+	public Coordinate position;
+	private NavModule nav;
+	private final double speed = 0.5;
 	
 	private String errorState;
 	
 	String testString;
+	
+	public Drone(NavModule nav)
+	{
+		this.nav = nav;
+	}
 	
 	public String execute(String instruction)
 	{
@@ -49,7 +56,7 @@ public class Drone
 		{
 			errorState = "Bad command parameters " + e.getMessage();
 		}
-		catch(BadCommandWarning e)
+		catch(BadCommandException e)
 		{
 			errorState = e.getMessage();
 		}
@@ -66,22 +73,26 @@ public class Drone
 			throw new InvalidParameterException("Incorrect number of command parameters");
 	}
 	
-	private void start() throws BadCommandWarning
+	private void start() throws BadCommandException
 	{
 		if(started)
-			throw new BadCommandWarning("Drone already started.");
+			throw new BadCommandException("Drone already started.");
+		if(position == null)
+			throw new BadCommandException("Initial position must be set before start.");
+		if(boundary == null)
+			throw new BadCommandException("Boundary size must be set before start");
 		
 		started = true;
 	}
 	
 	private void setBoundary(int x, int y)
 	{
-		testString = "Boundary is (" + x + "," + y + ")";
+		boundary = new Coordinate(x,  y);
 	}
 	
 	private void setInitialPos(int x, int y)
 	{
-		testString = "Set intial position (" + x + "," + y + ").";
+		position = new Coordinate(x,  y);
 	}
 	
 	private void restart()
@@ -89,10 +100,10 @@ public class Drone
 		testString = "restart";
 	}
 	
-	private void shutdown() throws BadCommandWarning
+	private void shutdown() throws BadCommandException
 	{
 		if(!started)
-			throw new BadCommandWarning("Drone not started.");
+			throw new BadCommandException("Drone not started.");
 		restart();
 		started = false;
 	}
@@ -117,13 +128,18 @@ public class Drone
 		testString = "navigate home";
 	}
 	
-	private void move(int duration, int direction)
+	private void move(int duration, int direction) throws BadCommandException
 	{
-		testString = "move for " + duration + "s, at " + direction + " degrees";
+		if(duration <= 0)
+			throw new BadCommandException("Must have a positive duration of flight.");
+		if(direction < 0 || direction > 360)
+			throw new BadCommandException("Direction must be between 0 and 360 inclusive.");
+		
+		nav.updatePos(this, position, duration, direction, speed);
 	}
 	
 	private String getStateString()
 	{
-		return String.format("%s \t %b, %s", currentCommand, started, errorState);
+		return String.format("%-10s %b %s %s %s", currentCommand, started, position, boundary, errorState);
 	}
 }

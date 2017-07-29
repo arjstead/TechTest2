@@ -5,13 +5,13 @@ import java.io.IOException;
 
 public class Controller
 {
-	private static Drone drone = new Drone();
+	private static Drone drone = new Drone(new FreedomNav());
 	private static BufferedReader instructionFileReader = null;
 	private static FileReader fr = null;
 
 	public static void main(String[] args)
 	{
-		String instructionFilePath = "C:\\Users\\Stead\\workspace\\AccessPay\\tests\\test3.txt";
+		String instructionFilePath = "C:\\Users\\Stead\\workspace\\AccessPay\\tests\\test4.txt";
 		//String instructionFilePath = args[0];
 		setUpFileReader(instructionFilePath);
 		
