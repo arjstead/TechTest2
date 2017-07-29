@@ -1,0 +1,31 @@
+S
+B 3 5
+B
+B 3
+B 3 5 
+B THR
+I 4 5
+I
+I 4
+I FOUR
+S
+D
+T
+F
+A 5
+A FIVE
+A 5.3
+S
+A 4 6
+D
+M 3 2
+D
+I 4 6
+D
+s
+S
+S
+T
+!
+%
+B I 4 

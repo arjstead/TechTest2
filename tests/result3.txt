@@ -1,0 +1,31 @@
+S 	 true, 
+B 3 5 	 true, 
+B 	 true, Incorrect number of command parameters
+B 3 	 true, Incorrect number of command parameters
+B 3 5  	 true, 
+B THR 	 true, Incorrect number of command parameters
+I 4 5 	 true, 
+I 	 true, Incorrect number of command parameters
+I 4 	 true, Incorrect number of command parameters
+I FOUR 	 true, Incorrect number of command parameters
+S 	 true, Drone already started.
+D 	 false, 
+T 	 false, 
+F 	 false, 
+A 5 	 false, 
+A FIVE 	 false, Bad command parameters For input string: "FIVE"
+A 5.3 	 false, Bad command parameters For input string: "5.3"
+S 	 true, 
+A 4 6 	 true, Incorrect number of command parameters
+D 	 false, 
+M 3 2 	 false, 
+D 	 false, Drone not started.
+I 4 6 	 false, 
+D 	 false, Drone not started.
+s 	 false, No such command s
+s 	 false, No such command s
+s 	 false, No such command s
+T 	 false, 
+! 	 false, No such command !
+% 	 false, No such command %
+B I 4  	 false, Bad command parameters For input string: "I"

@@ -2,22 +2,27 @@ import java.security.InvalidParameterException;
 
 public class Drone 
 {
+	private String currentCommand;
+	private boolean started;
 	private Coordinate boundary;
 	private Coordinate position;
-	private boolean error;
-	private String testString;
+	
+	private String errorState;
+	
+	String testString;
 	
 	public String execute(String instruction)
 	{
 		decode(instruction);	
-		return testString;
+		return getStateString();
 	}
 	
 	private void decode(String instruction)
-	{
-		error = false;
-		
+	{		
+		currentCommand = instruction;
 		String[] parameters = instruction.split(" ");
+		
+		errorState = "";
 		
 		try
 		{
@@ -36,34 +41,37 @@ public class Drone
 				default: throw new InvalidParameterException("No such command " + parameters[0]);
 			}
 		}
-		catch(ArrayIndexOutOfBoundsException e)
-		{
-			testString = "Too few parameters";
-		}
 		catch(InvalidParameterException e)
 		{
-			testString = e.getMessage();
+			errorState = e.getMessage();
 		}
 		catch(NumberFormatException e)
 		{
-			testString = "Bad command parameters " + e.getMessage();
+			errorState = "Bad command parameters " + e.getMessage();
+		}
+		catch(BadCommandWarning e)
+		{
+			errorState = e.getMessage();
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
-			testString = "unknown error";
+			errorState = "unknown error";
 		}
 	}
 	
 	private void chkArgs(int number, String[] params) throws Exception
 	{
 		if(params.length != (number+1))
-			throw new InvalidParameterException("Too many command parameters");
+			throw new InvalidParameterException("Incorrect number of command parameters");
 	}
 	
-	private void start()
+	private void start() throws BadCommandWarning
 	{
-		testString = "Start drone";
+		if(started)
+			throw new BadCommandWarning("Drone already started.");
+		
+		started = true;
 	}
 	
 	private void setBoundary(int x, int y)
@@ -81,9 +89,12 @@ public class Drone
 		testString = "restart";
 	}
 	
-	private void shutdown()
+	private void shutdown() throws BadCommandWarning
 	{
-		testString = "Shutdown";
+		if(!started)
+			throw new BadCommandWarning("Drone not started.");
+		restart();
+		started = false;
 	}
 	
 	private void toggleLights()
@@ -109,5 +120,10 @@ public class Drone
 	private void move(int duration, int direction)
 	{
 		testString = "move for " + duration + "s, at " + direction + " degrees";
+	}
+	
+	private String getStateString()
+	{
+		return String.format("%s \t %b, %s", currentCommand, started, errorState);
 	}
 }
