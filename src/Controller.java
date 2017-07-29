@@ -11,7 +11,7 @@ public class Controller
 
 	public static void main(String[] args)
 	{
-		String instructionFilePath = "C:\\Users\\Stead\\workspace\\AccessPay\\tests\\test1.txt";
+		String instructionFilePath = "C:\\Users\\Stead\\workspace\\AccessPay\\tests\\test2.txt";
 		//String instructionFilePath = args[0];
 		setUpFileReader(instructionFilePath);
 		

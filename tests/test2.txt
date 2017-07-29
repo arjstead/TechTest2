@@ -1,0 +1,31 @@
+S
+B 3 5
+B
+B 3
+B 3 5 6
+B THREE FIVE
+I 4 5
+I
+I 4
+I 4 6 7
+I FOUR TEN
+R
+D
+T
+F
+A 5
+A FIVE
+A 5.3
+A
+A 4 6
+H
+M 3 250
+M
+M 5
+M 5 10 200
+M ! $
+
+T
+!
+%
+B I 4 5
