@@ -11,7 +11,8 @@ public class Controller
 
 	public static void main(String[] args)
 	{
-		String instructionFilePath = args[0];
+		String instructionFilePath = "C:\\Users\\Stead\\workspace\\AccessPay\\tests\\test1.txt";
+		//String instructionFilePath = args[0];
 		setUpFileReader(instructionFilePath);
 		
 		// Loop through commands in the instruction file.
@@ -57,20 +58,6 @@ public class Controller
 			e.printStackTrace();
 
 		} 
-		finally 
-		{
-			try 
-			{
-				if (instructionFileReader != null)
-					instructionFileReader.close();
-				if (fr != null)
-					fr.close();
-			} 
-			catch (IOException ex)
-			{
-				ex.printStackTrace();
-			}
-		}
 	}
 	
 	private static void output(Object obj)

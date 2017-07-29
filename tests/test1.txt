@@ -1,0 +1,20 @@
+This
+is to 
+test that the
+
+input 
+from 
+this 
+file 
+is properly
+read out and passed
+to the drone
+class
+
+.
+
+,
+!
+"
+
+

@@ -1,4 +1,5 @@
 
-public class NavModule {
+public class NavModule 
+{
 
 }
