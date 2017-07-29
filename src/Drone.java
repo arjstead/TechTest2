@@ -5,7 +5,7 @@ public class Drone
 	private String currentCommand;
 	private boolean started;
 	private Coordinate boundary;
-	public Coordinate position;
+	private Coordinate position;
 	private NavModule nav;
 	private final double speed = 0.5;
 	
@@ -95,17 +95,20 @@ public class Drone
 		position = new Coordinate(x,  y);
 	}
 	
-	private void restart()
+	private void restart() throws BadCommandException
 	{
-		testString = "restart";
+		if(started)
+			throw new BadCommandException("Cannot restart in flight.");
+		boundary = null;
+		position = null;
 	}
 	
 	private void shutdown() throws BadCommandException
 	{
 		if(!started)
 			throw new BadCommandException("Drone not started.");
-		restart();
 		started = false;
+		restart();
 	}
 	
 	private void toggleLights()
@@ -130,12 +133,14 @@ public class Drone
 	
 	private void move(int duration, int direction) throws BadCommandException
 	{
+		if(!started)
+			throw new BadCommandException("Drone not started yet.");
 		if(duration <= 0)
 			throw new BadCommandException("Must have a positive duration of flight.");
 		if(direction < 0 || direction > 360)
 			throw new BadCommandException("Direction must be between 0 and 360 inclusive.");
 		
-		nav.updatePos(this, position, duration, direction, speed);
+		nav.updatePos(position, duration, direction, speed, boundary);
 	}
 	
 	private String getStateString()

@@ -1,5 +1,5 @@
 
 public abstract class NavModule 
 {
-	public abstract void updatePos(Drone d, Coordinate p, int dur, int dir, double sp);
+	public abstract void updatePos(Coordinate d, int dur, int dir, double sp, Coordinate bnd);
 }
