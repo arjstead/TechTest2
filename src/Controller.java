@@ -5,49 +5,30 @@ import java.io.IOException;
 
 public class Controller
 {
-	private static Drone drone = new Drone(new FreedomNav());
-	private static BufferedReader instructionFileReader = null;
-	private static FileReader fr = null;
+	private Drone drone;
+	private BufferedReader instructionFileReader = null;
+	private FileReader fr = null;
 
-	public static void main(String[] args)
+	public static void main(String[] args) 
 	{
-		String instructionFilePath = "C:\\Users\\Stead\\workspace\\AccessPay\\tests\\test5.txt";
-		//String instructionFilePath = args[0];
-		setUpFileReader(instructionFilePath);
+		 String instructionFilePath = "C:\\Users\\Stead\\workspace\\AccessPay\\tests\\test7.txt";
 		
-		// Loop through commands in the instruction file.
-		try
-		{
-			String instruction;
-			while ((instruction = instructionFileReader.readLine()) != null)
-			{
-				output(drone.execute(instruction));
-			}
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-		finally
-		{
-			try 
-			{
-				if (instructionFileReader != null)
-					instructionFileReader.close();
-				if (fr != null)
-					fr.close();
-			} 
-			catch (IOException ex)
-			{
-				ex.printStackTrace();
-			}
-		}
+		// Gets the file containing the instruction stream from the CLI argument.
+		//String instructionFilePath = args[0];
+		
+		// Creates an instance to control the drone.
+		Controller controller = new Controller(instructionFilePath);
+		
+		// Gives the controler a drone to fly.
+		controller.drone = new Drone(controller, new FreedomNav());
+		
+		// Starts the control loop of the drone.
+		controller.drone.run();
 	}
 	
-	public static void setUpFileReader(String fileName)
+	public Controller(String fileName)
 	{
 		File testFile = new File(fileName);
-
 		try 
 		{
 			fr = new FileReader(testFile);
@@ -56,16 +37,24 @@ public class Controller
 		catch (IOException e) 
 		{
 			e.printStackTrace();
-
 		} 
 	}
 	
-	private static void output(Object obj)
+	public String sendNextInstruction()
 	{
-		System.out.println(obj);
+		try
+		{
+			return instructionFileReader.readLine();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
-	
-	
-
+	public void output(String state)
+	{
+		System.out.println(state);
+	}
 }

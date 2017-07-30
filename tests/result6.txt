@@ -1,0 +1,29 @@
+B 10 10    false null (10.0, 10.0) Off 
+I 5 5      false (5.0, 5.0) (10.0, 10.0) Off 
+S          true  (5.0, 5.0) (10.0, 10.0) Off 
+M 1 0      true  (5.0, 5.5) (10.0, 10.0) Off 
+T          true  (5.0, 5.5) (10.0, 10.0) On 
+T          true  (5.0, 5.5) (10.0, 10.0) Off 
+T          true  (5.0, 5.5) (10.0, 10.0) On 
+M 1 0      true  (5.0, 6.0) (10.0, 10.0) On 
+T          true  (5.0, 6.0) (10.0, 10.0) Off 
+M 1 0      true  (5.0, 6.5) (10.0, 10.0) Off 
+M 1 0      true  (5.0, 7.0) (10.0, 10.0) Off 
+T          true  (5.0, 7.0) (10.0, 10.0) On 
+D          false null null On 
+R          false null null On 
+B 10 10    false null (10.0, 10.0) On 
+I 10 10    false (10.0, 10.0) (10.0, 10.0) On 
+S          true  (10.0, 10.0) (10.0, 10.0) On 
+M 1 0      true  (10.0, 10.0) (10.0, 10.0) On 
+M 1 90     true  (10.0, 10.0) (10.0, 10.0) On 
+M 1 180    true  (10.0, 9.5) (10.0, 10.0) On 
+D          false null null On 
+R          false null null On 
+B 10 10    false null (10.0, 10.0) On 
+I 10 11    false null (10.0, 10.0) On Starting nav.position outside of nav.boundary.
+S          false null (10.0, 10.0) On Initial nav.position must be set before start.
+M 1 0      false null (10.0, 10.0) On Drone not started yet.
+M 1 90     false null (10.0, 10.0) On Drone not started yet.
+M 1 180    false null (10.0, 10.0) On Drone not started yet.
+D          false null (10.0, 10.0) On Drone not started.
