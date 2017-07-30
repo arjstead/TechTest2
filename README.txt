@@ -4,8 +4,7 @@ To run the program pull the code and enter the bin folder. Run the command 'java
 
 ========== Approach ========== 
 
-My approach was to create a minimal viable product and then chip away by adding a feature, testing and releasing a working version
-before moving on to another feature. The test stages show the feature implementation progression.
+My approach was to create a minimal viable product and then chip away by adding a feature, testing and releasing a working version before moving on to another feature. The test stages show the feature implementation progression.
 
 Test 1 : Can the controller pass strings to the drone and the drone send them back to be spat out as the output.
 Test 2 : Can the controller pass commands to the drone and can the drone then properly decode them and handle command errors.
@@ -13,8 +12,7 @@ Test 3 : Drone start stop logic from controller commands.
 Test 4 : Drone movement logic from controller commands.
 Test 5 : Boundary collision logic from controller commands.
 
-- At this point the logic was changed so the drone polled the controller for the next command as opposed to the controller sending commands, this
-  gives greater control to the drone eg. commands being executed in serial for different durations.
+- At this point the logic was changed so the drone polled the controller for the next command as opposed to the controller sending commands, this gives greater control to the drone eg. commands being executed in serial for different durations.
 
 Test 6 : Toggling lights from commands.
 Test 7 : Navigating home.
@@ -23,9 +21,7 @@ Test 7 : Navigating home.
 =========== Testing ============
 
 The testing suite is basic. A file containing commands is given as a CLI parameter when running the controller (main class).
-A simulated drone is created and runs the commands, passing its new state after each back as a string which is printed on the CLI.
-The output can then be compared to a pre-calculated output to check the behaviour is as expected.
-I am satisfied that I have tested a good coverage of boundary and erroneous cases to say that the solution is correct.
+A simulated drone is created and runs the commands, passing its new state after each back as a string which is printed on the CLI. The output can then be compared to a pre-calculated output to check the behaviour is as expected. I am satisfied that I have tested a good coverage of boundary and erroneous cases to say that the solution is correct.
 
 ========== Evaluation ========== 
 
